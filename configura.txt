@@ -1,0 +1,92 @@
+-- Pryecto fullStack Django Vue + MySQL
+
+CONFIGURACIÓN DEL ENTORNO
+    python -m venv envFullStack
+
+INSTALACION DE DJANGO + RESTFRAMEWORK
+    pip install djangorestframework
+    -- nos intalará últimas versiones
+INSTALACION DE CORS HEADERS
+    pip install django-cors-headers
+
+CREAR PROYECTO DE DJANGO
+    django-admin startproject DjangoAPI .
+
+LEVANTAR EL SERVIDOR
+    python manage.py runserver
+
+CREAR APP
+    django-admin startapp EmployeeApp
+
+ASIGNAR APPS A settings.py INTALLED_APPS
+    'rest_framework',
+    'corsheaders',
+    'EmployeeApp.apps.EmployeeappConfig'
+
+ASIGNAR MIDELWARE CORSHEADERS:
+    'corsheaders.middleware.CorsMiddleware',
+
+AGREGAR LA LINEA CORS ORIGIN ALLOW ALL entre INSTALLED_APPS Y MIDDLEWARE
+    CORS_ORIGIN_ALLOW_ALL = True
+
+
+CREACIÓN DE MODELOS:
+    Departaments
+    Employees
+
+CREACIÓN DE BASE DE DATOS DE MySQL 
+    nombre de la conexión: mytestmysql
+    usuario: testadmin@mytestmysql
+    clave: Prueba1234
+    (Realmente uso root/PasswordPrueba1...)
+    nombre de la base: mytestdb
+
+INSTALACIÓN DEL DRIVER DE MySQL
+    pip install pymysql
+
+ASIGNAR LA CONEXIÓN EN settings.py
+
+--Es necesario para mysql agregar las siguientes 2 líneas
+-- antes de la línea DATABASES = {}
+
+    import pymysql
+    pymysql.install_as_MySQLdb()
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mytestdb',
+        'USER': 'root',
+        'PASSWORD': 'Prueba1234',
+        'HOST': 'localhost',
+        'PORT': '3307'
+    }
+}
+
+REALIZAR MIGRACIONES PARA MODELO EmployeeApp
+
+    python manage.py mekemigrations EmployeeApp
+
+REALIZAR MIGRATE DEL MODELO EmployeeApp
+    python manage.py migrate EmployeeApp
+
+POBLANDO TABLAS PARA PRUEBAS
+    SELECT * from employeeapp_departaments;
+
+    INSERT into employeeapp_departaments VALUES(1,'IT');
+    INSERT into employeeapp_departaments VALUES(2, 'Support');
+
+    SELECT * from employeeapp_employees;
+
+    INSERT INTO employeeapp_employees VALUES
+    (1, 'Bob', 'IT', '2021-08-05', 'anonymus.png');
+
+CREACIÓN DE SERIALIZERS PARA LA APP EmployeeApp:
+--En el directorio de EmployeeApp se crea el archivo
+    serializers.py
+
+
+CREACIÓN DE VISTAS EN EL ARCHIVO views.py del directorio EmployeeApp:
+
+
+
+
